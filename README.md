@@ -1,11 +1,11 @@
-This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22. Here you can find his presentation (min 30-min 1.20): 
+This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22. Here you can find his presentation (h from min 30 to 1h20min ): 
 [https://www.twitch.tv/videos/1300382536](https://www.twitch.tv/videos/1300382536) 
 
 ## **Going into Circom**
 
 How does verification of computation works today? You have inputs, a detrministic program and an output. The naive way for a verifier to prove that I did the right computation would be to run the same program with the same input and check if the output is the same. 
 
-But what if the program took 1 day to compute? Then the verifier will spend 1 day to verify if the computation was performed correctly. 
+But what if the program took 1 day to compute? Then the verifier will have to spend 1 day to verify if the computation was performed correctly. 
 
 How does ZKP work? 
 
@@ -16,11 +16,11 @@ How does ZKP work?
 
 ![Screenshot 2022-02-23 at 08.04.34.png](screenshots/screenshot1.png)
 
-**Thies is the magic of scalability enabled by zkp**
+**This is the magic of scalability enabled by zkp**
 
 ## **ZKP into practice**
 
-For example, right now miners need to validate every single transactions add it to a new block and other nodes to approve it and get to consensus will need to check the validity of the transactions as well by processing each one of them! 
+For example, right now miners need to validate every single transactions add it to a new block and other nodes, in order to approve it and reach  consensus will need to check the validity of the transactions by processing each one of them! 
 
 With ZKP they don’t need to, they can just get the proof and verifity the validity of the computation in just a few milliseconds. They don’t need to compute again all the transactions. Just need to compute the proof! 
 
@@ -28,7 +28,7 @@ With ZKP they don’t need to, they can just get the proof and verifity the vali
 
 **Why is zero knowledge**? Because you don’t even have to reveal you the inputs! This is really important for privacy perserving applications as well!
 
-I can execute an hash function (non reversable function) and I’ll give you the result of the function + the proof and from these two pieces you will be able to verify that I run the function correctly without knowing the inputs of the function (this is the zero knowledge part!).
+I can execute an hash function (non reversable function) and I’ll give you the result of the function + the proof and from these two pieces the verifier is  be able to verify that I run the function correctly without knowing the inputs of the function (this is the zero knowledge part!).
 
 The cool thing of the ZKP is that it allows:
 
@@ -49,7 +49,7 @@ The circom templates are also composable: in the next example we compose the XOR
 
 ![Screenshot 2022-02-23 at 14.20.25.png](screenshots/screenshot3.png)
 
-Github/iden3/circomlib is a tooling set of standard circiuts that you can use already implemented for you!
+Github/iden3/circomlib is a tooling set of standard circiuts!
 
 Github/iden3/snarkJs is a javascript library. Useful to generate proof in the browser!
 
@@ -105,7 +105,7 @@ I want to prove that I know two numbers (private piece) that when you multiply t
 
 I am compiling the file *multiplier.circom* and I want to:
 
-- output the constraints in a r1cs format
+- Iutput the constraints in a r1cs format
 - Compile the circuit to wasm
 - Output witness in sym format
 - Compiles the circuit to c
@@ -142,11 +142,14 @@ We now have set up the circuit, let’s generate a witness
 
 ![Screenshot 2022-02-23 at 10.44.09.png](screenshots/screenshot4.png)
 
-Since the output I’m choosing here are 3 and 11, the output should be 33! 
+Since the output I’m choosing here are 3 and 11, the output should be 33.
 
 `node multiplier_js/generate_witness.js multiplier_js/multiplier.wasm in.json witness.wtns`
 
-I’m passing 3 parameters ⇒ the first one `multiplier_js/multiplier.wasm` is the file that I am gonna use to generate the witness `in.json`  is the input I just created to generate the witness and `witness.wtns` is the file output that I want to generate. In witness.wtns I will see displayed all the intermediary values that the program is computing 
+I’m passing 3 parameters:
+- the first one `multiplier_js/multiplier.wasm` is the file that I am gonna use to generate the witness 
+-`in.json` is the input I just created to generate the witness 
+- `witness.wtns` is the file output that I want to generate. In witness.wtns I will see displayed all the intermediary values that the program is computing 
 
 ### Viewing the witness 
 
@@ -154,17 +157,17 @@ right now it is in binary so we need to convert it to JSON to actually see that
 
 `snarkjs wtns export json witness.wtns witness.json`
 
-Here’s the witness 
+Here’s the witness:
 
 ![Screenshot 2022-02-23 at 10.50.41.png](screenshots/screenshot5.png)
 
-1 is just a constant of the constraints system generted
+1 is just a constant of the constraints system generated
 
 33 is the public output
 
 3, 11 are the private inputs I’m taking
 
-These are all the wires computed by the circuit
+These 4 values are all the wires computed by the circuit
 
 ### Download the trusted setup (Powers of tau file) 
 
@@ -176,7 +179,7 @@ It is a community generated trusted setup
 
 `snarkjs plonk setup multiplier.r1cs powersOfTau28_hez_final_11.ptau multiplier.zkey`
 
-Here the multiplier.zkey is the output file of this operation⇒ it is the proving key
+Here the multiplier.zkey is the output file of this operation => it is the proving key
 
 ### Get a verification key in json format (from the proving key)
 
@@ -199,13 +202,13 @@ In order to generate the proof I need:
 - The output (proof) will be stored in the proof.json
 - The public output of the computation (”33”) will be stored in the public.json file!
 
-Here’s the plonk proof 
+Here’s the plonk proof:
 
 ![Screenshot 2022-02-23 at 15.56.58.png](screenshots/screenshot7.png)
 
 ### Verify the proof
 
-Let’s verify that ⇒ Now I’m on the other side, I’m the verifier. The only stuff that I got (As verifier) in my hand right now are the output and the proof. My goal is to prove that the computation performed by the prover was right, namely that in he input 2 correct numbers in order to get to 33. The cool thing about zero knowledge proof is, again, that me (the verifier) never have to know the inputs in order to verify the correctness of the computation.
+Let’s verify that ⇒ Now I’m on the other side, I’m the verifier. The only stuff that I got (as verifier) in my hand right now are the output and the proof. My goal is to prove that the computation performed by the prover was right, namely that he input 2 correct numbers in order to get to 33. The cool thing about zero knowledge proof is, again, that me (the verifier) never have to know the inputs in order to verify the correctness of the computation.
 
 `snarkjs plonk verify verification_key.json public.json proof.json`
 
@@ -223,7 +226,6 @@ In this case snarkjs has been run in the command line but you can integrate it i
 
 ### Verify the proof in the smart contract!
 
-The smart contract works that you pass in the proof and you get the verification back (bool true or false)
 
 Snarkjs provides a tool that generates a solidity code to validate this proof! 
 
@@ -234,15 +236,17 @@ Snarkjs provides a tool that generates a solidity code to validate this proof!
 
 Now you can run this contract on remix (copy and paste it) 
 
+The smart contract works that you pass in the proof and you get the verification back (bool true or false)
+
 ![Screenshot 2022-02-23 at 16.09.14.png](screenshots/screenshot9.png)
 
 After compiling and deploying the smart contract on Remix 
 
 ![Screenshot 2022-02-23 at 16.16.22.png](screenshots/screenshot10.png)
 
-- This contract has just one function that is *verifyProof*
+This contract has just one function that is *verifyProof*
 
-You need to pass in the proof and the array of the public output that you want to prove (which is in this case 33! 
+You need to pass in the proof and the array of the public output that you want to prove (which, in this case, has only one value => 33) 
 
 In order to generate the proof in bytes format you need to run 
 
