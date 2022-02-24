@@ -1,4 +1,5 @@
-⇒ [https://www.twitch.tv/videos/1300382536](https://www.twitch.tv/videos/1300382536) 
+This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22. Here you can find his presentation (min 30-min 1.20): 
+[https://www.twitch.tv/videos/1300382536](https://www.twitch.tv/videos/1300382536) 
 
 **Going into circom**
 
@@ -37,7 +38,7 @@ Same technology enable by the **succint nature of the proof**, the proof doesn�
 
 Example of a circuit
 
-![Screenshot 2022-02-23 at 14.17.03.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/44ba743a-b3ab-4207-a1fa-48940883500f/Screenshot_2022-02-23_at_14.17.03.png)
+![Screenshot 2022-02-23 at 14.17.03.png](screenshots/screenshot2.png)
 
 - The last line of the circuit set the contrains of the system and set how to compute the output!
 
@@ -45,7 +46,7 @@ The circom templates are also composable: in the next example we compose the XOR
 
 **In circom circuits the inputs by default are private, and the output by defualt is public. But you can change that by saying which input are public if you want to put some public inputs. In that case we say that inputs s2 and s4 are public even tough they could all be considered private and it will still work!**
 
-![Screenshot 2022-02-23 at 14.20.25.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/eb8ea437-55d5-4489-845b-f1c7d7f6c397/Screenshot_2022-02-23_at_14.20.25.png)
+![Screenshot 2022-02-23 at 14.20.25.png](screenshots/screenshot3.png)
 
 **Check github/iden3/circomlib**
 
@@ -76,9 +77,7 @@ The circom templates are also composable: in the next example we compose the XOR
 `npm install -g snarkjs`
 
 - create a working directory
-    
-    ![Screenshot 2022-02-23 at 14.37.10.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/baa674a3-5675-47ea-bc80-9a0a0651b5c7/Screenshot_2022-02-23_at_14.37.10.png)
-    
+        
 - create a basic circuit (add a multiplier.circom file to the factor directory)
 
 ```jsx
@@ -140,7 +139,7 @@ How to generate the witness:
 
 ⇒ I need to pass inputs of my function via json file, call it *in.json*
 
-![Screenshot 2022-02-23 at 10.44.09.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1475879e-cf70-477b-ac03-059a25565e86/Screenshot_2022-02-23_at_10.44.09.png)
+![Screenshot 2022-02-23 at 10.44.09.png](screenshots/screenshot4.png)
 
 Since the output I’m choosing here are 3 and 11, the output should be 33! 
 
@@ -156,7 +155,7 @@ I’m passing 3 parameters ⇒ the first one `multiplier_js/multiplier.wasm` is 
 
 Here’s the witness 
 
-![Screenshot 2022-02-23 at 10.50.41.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f679ccea-8835-4ee1-94cd-44793342f04c/Screenshot_2022-02-23_at_10.50.41.png)
+![Screenshot 2022-02-23 at 10.50.41.png](screenshots/screenshot5.png)
 
 1 is just a constant of the constraints system generted
 
@@ -184,7 +183,7 @@ Here the multiplier.zkey is the output file of this operation⇒ it is the provi
 
 `snarkjs zkey export verificationkey multiplier.zkey verification_key.json` 
 
-![Screenshot 2022-02-23 at 15.50.17.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c32baa63-8987-49fe-9891-8fb2e0f08b7b/Screenshot_2022-02-23_at_15.50.17.png)
+![Screenshot 2022-02-23 at 15.50.17.png](screenshots/screenshot6.png)
 
 ⇒ The setup is ready! Now we can start generating proofs! 
 
@@ -203,7 +202,7 @@ In order to generate the proof I need:
 
 Here’s the plonk proof 
 
-![Screenshot 2022-02-23 at 15.56.58.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7aa2275b-4961-40b6-9286-7a3fa75960ee/Screenshot_2022-02-23_at_15.56.58.png)
+![Screenshot 2022-02-23 at 15.56.58.png](screenshots/screenshot7.png)
 
 Let’s verify that ⇒ Now I’m on the other side, I’m the verifier. The only stuff that I got (As verifier) in my hand right now are the output and the proof. My goal is to prove that the computation performed by the prover was right, namely that in he input 2 correct numbers in order to get to 33. The cool thing about zero knowledge proof is, again, that me (the verifier) never have to know the inputs in order to verify the correctness of the computation.
 
@@ -211,13 +210,13 @@ Let’s verify that ⇒ Now I’m on the other side, I’m the verifier. The onl
 
 As you can see to do that I only need to have the verification key (`verification_key.json)`, the public output (`public.json`) and the computation proof `proof.json`
 
-![Screenshot 2022-02-23 at 16.02.03.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6dbe5cc7-ad46-4991-9c3d-caf9e0c4f500/Screenshot_2022-02-23_at_16.02.03.png)
+![Screenshot 2022-02-23 at 16.02.03.png](screenshots/screenshot7.5.png)
 
 This output tells us that the verification has been positive! 
 
 You can try to modify a single unit in the proof file and will see that the verification will fail
 
-![Screenshot 2022-02-23 at 16.02.53.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5b7118c4-f63b-46e5-9a14-341e06cf918f/Screenshot_2022-02-23_at_16.02.53.png)
+![Screenshot 2022-02-23 at 16.02.53.png](screenshots/screenshot8.png)
 
 In this case snarkjs has been run in the command line but you can integrate it in any node program in the browser. 
 
@@ -234,11 +233,11 @@ Snarkjs provides a tool that generates a solidity code to validate this proof!
 
 Now you can run this contract on remix (copy and paste it) 
 
-![Screenshot 2022-02-23 at 16.09.14.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/99e44bd3-c135-465a-8cf5-56648b25527e/Screenshot_2022-02-23_at_16.09.14.png)
+![Screenshot 2022-02-23 at 16.09.14.png](screenshots/screenshot9.png)
 
 After compiling and deploying the smart contract on Remix 
 
-![Screenshot 2022-02-23 at 16.16.22.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5d77d6ba-ecb7-4932-ab04-1bd6512ece33/Screenshot_2022-02-23_at_16.16.22.png)
+![Screenshot 2022-02-23 at 16.16.22.png](screenshots/screenshot10.png)
 
 - This contract has just one function that is *verifyProof*
 
@@ -256,6 +255,15 @@ The first part is the proof written in bytes, while the array in this case conta
 
 To test it input the proof and the array into the smart contract of remix 
 
-![Screenshot 2022-02-23 at 16.22.09.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/130c9b1e-6cc6-4937-b937-c729604e692e/Screenshot_2022-02-23_at_16.22.09.png)
+![Screenshot 2022-02-23 at 16.22.09.png](screenshots/screenshot11.png)
 
 As you can see the proof has been verified!
+
+## **Docs and other useful resources**
+
+- [circom documentation](https://docs.circom.io/getting-started/installation/#installing-circom) 
+- [circom github](https://github.com/iden3/circom)
+- [circomlib](https://github.com/iden3/circomlib)
+- [circomlibjs](https://github.com/iden3/circomlibjs)
+- [snarkJS](https://github.com/iden3/snarkjs)
+- [rapidSnark](https://github.com/iden3/rapidsnark)
