@@ -11,7 +11,7 @@ How does ZKP work?
 
 - You have a deterministic program (*circuit)*
 - I compute the output of my program
-- + I compute a **proof** of my computation and give it to the verifier
+- I compute a **proof** of my computation and give it to the verifier
 - The verifier will be able to run a more light weight computation starting from the proof I provided and verify that I did the entire computation correctly. **The verifier doesn’t need to know the entire set of inputs to do that**
 
 ![Screenshot 2022-02-23 at 08.04.34.png](screenshots/screenshot1.png)
