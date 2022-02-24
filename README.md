@@ -1,4 +1,4 @@
-This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22. Here you can find his presentation (h from min 30 to 1h20min ): 
+This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22. Here you can find his presentation (from min30 to h1min20): 
 [https://www.twitch.tv/videos/1300382536](https://www.twitch.tv/videos/1300382536) 
 
 ## **Going into Circom**
