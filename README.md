@@ -1,68 +1,65 @@
 This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22. Here you can find his presentation (min 30-min 1.20): 
 [https://www.twitch.tv/videos/1300382536](https://www.twitch.tv/videos/1300382536) 
 
-**Going into circom**
+## **Going into Circom**
 
 How does verification of computation works today? You have inputs, a detrministic program and an output. The naive way for a verifier to prove that I did the right computation would be to run the same program with the same input and check if the output is the same. 
 
-But what if the program took 1 day to compute? Then you’ll spend 1 day to verify if the computation was performed correctly. 
+But what if the program took 1 day to compute? Then the verifier will spend 1 day to verify if the computation was performed correctly. 
 
 How does ZKP work? 
 
 - You have a deterministic program (*circuit)*
+- I compute the output of my program
+- + I compute a **proof** of my computation and give it to the verifier
+- The verifier will be able to run a more light weight computation starting from the proof I provided and verify that I did the entire computation correctly. **The verifier doesn’t need to know the entire set of inputs to do that**
 
 ![Screenshot 2022-02-23 at 08.04.34.png](screenshots/screenshot1.png)
 
-- I compute the output of my program
-- + I compute a **proof** of my computation and give it to the verifier
-- The verifier will be able to run a more light weight computation starting from the proof I provided and verify that I did the entire computation correctly. **I don’t need to know the entire set of inputs to do that**
+**Thies is the magic of scalability enabled by zkp**
 
-⇒ Magic of scalability given by zkp! scalability
+## **ZKP into practice**
 
-Right now miners need to validate every single transactions add it to a new block and other nodes to approve it and get to consensus will need to check the validity of the transactions as well by processing each one of them! 
+For example, right now miners need to validate every single transactions add it to a new block and other nodes to approve it and get to consensus will need to check the validity of the transactions as well by processing each one of them! 
 
 With ZKP they don’t need to, they can just get the proof and verifity the validity of the computation in just a few milliseconds. They don’t need to compute again all the transactions. Just need to compute the proof! 
 
-## **The thing that you are proving is that the computation is valid**
+**In this case the thing that you are proving is that the computation is valid**
 
-**Why is zero knowledge**? Because you don’t even have to reveal you the inputs!!This is really important for privacy as well!  ⇒ privacy
+**Why is zero knowledge**? Because you don’t even have to reveal you the inputs! This is really important for privacy perserving applications as well!
 
-I can execute an hash function (non reversable function) and I’ll give you the result of the function + the proof and (from the proof) you will be able to verify that I run the function correctly without knowing the inputs of the function (this is the zero knowledge part!).
+I can execute an hash function (non reversable function) and I’ll give you the result of the function + the proof and from these two pieces you will be able to verify that I run the function correctly without knowing the inputs of the function (this is the zero knowledge part!).
 
-The cool thing of the proof is that it allows:
+The cool thing of the ZKP is that it allows:
 
 - scalability
 - privacy
 
-Same technology enable by the **succint nature of the proof**, the proof doesn’t contain anything about the origin of the information. And it is really small!!
+These two applications are enabled by the **succint nature of the proof**, namely the proof doesn’t contain anything about the origin of the information and it is really small!
 
 Example of a circuit
 
 ![Screenshot 2022-02-23 at 14.17.03.png](screenshots/screenshot2.png)
 
-- The last line of the circuit set the contrains of the system and set how to compute the output!
+- The last line of the circuit set the contrains of the system and set how to compute the output
 
 The circom templates are also composable: in the next example we compose the XOR template within the Composite circuit
 
-**In circom circuits the inputs by default are private, and the output by defualt is public. But you can change that by saying which input are public if you want to put some public inputs. In that case we say that inputs s2 and s4 are public even tough they could all be considered private and it will still work!**
+**In circom circuits the inputs by default are private, and the output by defualt is public. But you can change that by saying which input are public if you want to put some public inputs. In this case we say that inputs s2 and s4 are public even tough they could all be considered private and it will still work!**
 
 ![Screenshot 2022-02-23 at 14.20.25.png](screenshots/screenshot3.png)
 
-**Check github/iden3/circomlib**
+Github/iden3/circomlib is a tooling set of standard circiuts that you can use already implemented for you!
 
-⇒ tooling of standard circiuts that you can use already implemented for you! (merkle trees for airdrops is pretty awesome!!)
+Github/iden3/snarkJs is a javascript library. Useful to generate proof in the browser!
 
-**SnarkJS** is a javascript library. Useful to generate proof in the browser!
+## **CircomDemo**
 
-# Circom DEMO!
-
-### Install circom
-
-- install rust
+### install rust
 
 `curl --proto '=https' --tlsv1.2 [https://sh.rustup.rs](https://sh.rustup.rs/) -sSf | sh`
 
-- build circom from source
+### build circom from source
 
 `git clone [https://github.com/iden3/circom.git](https://github.com/iden3/circom.git)`
 
@@ -72,13 +69,17 @@ The circom templates are also composable: in the next example we compose the XOR
 
 `cargo install --path circom`
 
-- install snarkjs
+### install snarkjs
 
 `npm install -g snarkjs`
 
-- create a working directory
+### create a working directory
+
+`mkdir zkverse`
+
+`cd zkverse`
         
-- create a basic circuit (add a multiplier.circom file to the factor directory)
+### create a basic circuit (add a multiplier.circom file to the factor directory)
 
 ```jsx
 template Multiplier () { 
@@ -93,12 +94,12 @@ template Multiplier () {
 component main = Multiplier();
 ```
 
-I want to prove that I know two numbers that when you multiply them together it gives a specif number. 
+I want to prove that I know two numbers (private piece) that when you multiply them together it gives a specific number (public piece). 
 
 - c is the output which is public
 - a,b are inputs and they are private
 
-- Compile the circuit
+### Compile the circuit
 
 `circom multiplier.circom --r1cs --wasm --sym --c`
 
@@ -111,7 +112,7 @@ I am compiling the file *multiplier.circom* and I want to:
 
 ⇒ we now have the multiplier_js folder which is the javascript program to compute the witness  
 
-- Print info on the circuit (from the factor directory)
+### Print info on the circuit (from the factor directory)
 
 `snarkjs r1cs info multiplier.r1cs`
 
@@ -127,7 +128,7 @@ I am compiling the file *multiplier.circom* and I want to:
 
 We now have set up the circuit, let’s generate a witness
 
-How to generate the witness: 
+### How to generate the witness: 
 
 `cd multiplier_js` 
 
@@ -143,13 +144,13 @@ How to generate the witness:
 
 Since the output I’m choosing here are 3 and 11, the output should be 33! 
 
-How to generate a witness ? 
-
 `node multiplier_js/generate_witness.js multiplier_js/multiplier.wasm in.json witness.wtns`
 
 I’m passing 3 parameters ⇒ the first one `multiplier_js/multiplier.wasm` is the file that I am gonna use to generate the witness `in.json`  is the input I just created to generate the witness and `witness.wtns` is the file output that I want to generate. In witness.wtns I will see displayed all the intermediary values that the program is computing 
 
-- Wiewing the witness ⇒ right now it is in binary so we need to convert it to JSON to actually see that
+### Viewing the witness 
+
+right now it is in binary so we need to convert it to JSON to actually see that
 
 `snarkjs wtns export json witness.wtns witness.json`
 
@@ -163,23 +164,21 @@ Here’s the witness
 
 3, 11 are the private inputs I’m taking
 
-⇒ Here you see all the wires computed by the circuit
+These are all the wires computed by the circuit
 
-⇒ let’s go to the cryptographic part (we are gonna use plomb to generate the proof)
-
-- Download the trusted setup (Powers of tau file)
+### Download the trusted setup (Powers of tau file) 
 
 `wget [https://hermez.s3-eu-west-1.awazonaws.com/powersOfTau28_hez_final_11.ptau](https://hermez.s3-eu-west-1.awazonaws.com/powersOfTau28_hez_final_11.ptau)`
 
 It is a community generated trusted setup 
 
-- Plonk setup
+### Plonk setup
 
 `snarkjs plonk setup multiplier.r1cs powersOfTau28_hez_final_11.ptau multiplier.zkey`
 
 Here the multiplier.zkey is the output file of this operation⇒ it is the proving key
 
-- Get a verification key in json format (from the proving key)
+### Get a verification key in json format (from the proving key)
 
 `snarkjs zkey export verificationkey multiplier.zkey verification_key.json` 
 
@@ -189,7 +188,7 @@ Here the multiplier.zkey is the output file of this operation⇒ it is the provi
 
 We already have the witness computation. My goal is to proof that I know two numbers that, when multiplied together, the result is 33! 
 
-- generate the proof
+### generate the proof
 
 `snarkjs plonk prove multiplier.zkey witness.wtns proof.json public.json`
 
@@ -203,6 +202,8 @@ In order to generate the proof I need:
 Here’s the plonk proof 
 
 ![Screenshot 2022-02-23 at 15.56.58.png](screenshots/screenshot7.png)
+
+### Verify the proof
 
 Let’s verify that ⇒ Now I’m on the other side, I’m the verifier. The only stuff that I got (As verifier) in my hand right now are the output and the proof. My goal is to prove that the computation performed by the prover was right, namely that in he input 2 correct numbers in order to get to 33. The cool thing about zero knowledge proof is, again, that me (the verifier) never have to know the inputs in order to verify the correctness of the computation.
 
@@ -220,7 +221,7 @@ You can try to modify a single unit in the proof file and will see that the veri
 
 In this case snarkjs has been run in the command line but you can integrate it in any node program in the browser. 
 
-- verify the proof in the smart contract!
+### Verify the proof in the smart contract!
 
 The smart contract works that you pass in the proof and you get the verification back (bool true or false)
 
