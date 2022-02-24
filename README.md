@@ -105,7 +105,7 @@ I want to prove that I know two numbers (private piece) that when you multiply t
 
 I am compiling the file *multiplier.circom* and I want to:
 
-- Iutput the constraints in a r1cs format
+- Input the constraints in a r1cs format
 - Compile the circuit to wasm
 - Output witness in sym format
 - Compiles the circuit to c
@@ -142,7 +142,7 @@ We now have set up the circuit, let’s generate a witness
 
 ![Screenshot 2022-02-23 at 10.44.09.png](screenshots/screenshot4.png)
 
-Since the output I’m choosing here are 3 and 11, the output should be 33.
+Since the input I’m choosing here are 3 and 11, the output should be 33.
 
 `node multiplier_js/generate_witness.js multiplier_js/multiplier.wasm in.json witness.wtns`
 
