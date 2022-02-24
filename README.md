@@ -10,7 +10,7 @@ How does ZKP work?
 
 - You have a deterministic program (*circuit)*
 
-![Screenshot 2022-02-23 at 08.04.34.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ac350d25-8e52-4e89-bec7-6cbb0ffb3cf1/Screenshot_2022-02-23_at_08.04.34.png)
+![Screenshot 2022-02-23 at 08.04.34.png](screenshots/screenshot1.png)
 
 - I compute the output of my program
 - + I compute a **proof** of my computation and give it to the verifier
