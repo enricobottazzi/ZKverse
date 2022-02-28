@@ -171,7 +171,7 @@ These 4 values are all the wires computed by the circuit
 
 ### Download the trusted setup (Powers of tau file) 
 
-`wget [https://hermez.s3-eu-west-1.awazonaws.com/powersOfTau28_hez_final_11.ptau](https://hermez.s3-eu-west-1.awazonaws.com/powersOfTau28_hez_final_11.ptau)`
+`wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_11.ptau`
 
 It is a community generated trusted setup 
 
