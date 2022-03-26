@@ -105,7 +105,7 @@ I want to prove that I know two numbers (private piece) that when you multiply t
 
 I am compiling the file *multiplier.circom* and I want to:
 
-- Iutput the constraints in a r1cs format
+- Output the constraints in a r1cs format
 - Compile the circuit to wasm
 - Output witness in sym format
 - Compiles the circuit to c
