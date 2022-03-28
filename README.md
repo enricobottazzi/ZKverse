@@ -81,6 +81,8 @@ The demo that I am gonna run is based on the privacy application side of ZKP. Th
 2. Create and compile the circuit 
 3. Generate the witness 
 4. Generate the proof 
+5. Verify the proof
+6. Verify the proof via a smart contract
 
 ## 1. Circom and dependecies setup
 
@@ -203,7 +205,7 @@ It is a community generated trusted setup. // what is the trusted setup and why 
 ### Generate the verification key
 
 // what is the verification key?
-// Can it be kept public?
+// Can it be kept public? It doesn't reveal any information about the computation
 
 The verification key is generated starting from `multiplier.r1cs` (description of the circuit and its contraints) and `powersOfTau28_hez_final_11.ptau` which is the trusted setup. The output file of the operation is `multiplier.zkey`, namely the verification key for the circuit.
 
@@ -215,7 +217,7 @@ The verification key is generated starting from `multiplier.r1cs` (description o
 
 ![Screenshot 2022-02-23 at 15.50.17.png](screenshots/screenshot6.png)
 
-### generate the proof
+### Generate the proof
 
 Let's zoom back for a second. The prover holds:
 - A witness (`witness.wtns`) that describes its computation starting from the public inputs (3, 11) to the output (33)
@@ -233,13 +235,13 @@ Here’s the plonk proof:
 
 ![Screenshot 2022-02-23 at 15.56.58.png](screenshots/screenshot7.png)
 
-The proof is the file that, when passed to the verifier, will let him
-We already have the witness computation. My goal is to proof that I know two numbers that, when multiplied together, the result is 33! 
+## 5. Verify the proof
 
+Now the focus switches to the side of the verifier. The verifier only has access to the `public.json`, `proof.json` and `verification_key.json` files. 
+It is important to underline that none of these files contains information about the inputs chosen by the prover to run the computation.
+His/her goal is to prove that the computation performed by the prover was correct, namely that he input 2 correct numbers in order to get to 33 **without knowing any information about the a,b inputs chosen to run the computation**
 
 ### Verify the proof
-
-Let’s verify that ⇒ Now I’m on the other side, I’m the verifier. The only stuff that I got (as verifier) in my hand right now are the output and the proof. My goal is to prove that the computation performed by the prover was right, namely that he input 2 correct numbers in order to get to 33. The cool thing about zero knowledge proof is, again, that me (the verifier) never have to know the inputs in order to verify the correctness of the computation.
 
 `snarkjs plonk verify verification_key.json public.json proof.json`
 
@@ -247,7 +249,7 @@ As you can see to do that I only need to have the verification key (`verificatio
 
 ![Screenshot 2022-02-23 at 16.02.03.png](screenshots/screenshot7.5.png)
 
-This output tells us that the verification has been positive! 
+The result of the command tells that the result of the verification is positive! 
 
 You can try to modify a single unit in the proof file and will see that the verification will fail
 
@@ -255,46 +257,45 @@ You can try to modify a single unit in the proof file and will see that the veri
 
 In this case snarkjs has been run in the command line but you can integrate it in any node program in the browser. 
 
-### Verify the proof in the smart contract!
+## 6. Verify the proof via a smart contract
 
-Snarkjs provides a tool that generates a solidity code to validate this proof! 
+### 6.1. Generate a solidty verifier smart contract
+
+Snarkjs provides a tool that allows to generate a solidity smart contract in order to validate this proof. It is generated starting from the multiplier.zkey. The output of the program is the `verifier.sol` file
 
 `snarkjs zkey export solidityverifier multiplier.zkey verifier.sol`
 
-- To generate it I need to pass in the multiplier.zkey file (this is very specific to this circuit!)
-- The output will be the `verifier.sol` file
-
 Now you can run this contract on remix (copy and paste it) 
 
-The smart contract works that you pass in the proof and you get the verification back (bool true or false)
+This contract has just one function that is *verifyProof* that takes the proof as input and outputs a bool (true or false) telling if the verification was succesful or not.
 
 ![Screenshot 2022-02-23 at 16.09.14.png](screenshots/screenshot9.png)
-
-After compiling and deploying the smart contract on Remix 
-
 ![Screenshot 2022-02-23 at 16.16.22.png](screenshots/screenshot10.png)
 
-This contract has just one function that is *verifyProof*
+### 6.2. Generate solidty calldata
 
-You need to pass in the proof and the array of the public output that you want to prove (which, in this case, has only one value => 33) 
+In this second scenario, the verifier is the smart contract itself. 
+The verification is performed similarly as before, it only needs to export the `proof.json` and `public.json` files in bytes format in order to let Verifier.sol understand it.
 
-In order to generate the proof in bytes format you need to run 
+In order to generate the proof in bytes format it needs to run 
 
 `snarkjs zkey export soliditycalldata public.json proof.json`
 
-you get this inside your terminal 
+Below the result of the command:
 
 `0x0042450687ffb1cf0f7c333db2982bd2c2a04924a9c10e05b7d966a5f9a263ae1fa2fc80239eaf1331729c9146bedc06968660902bd81684d41dc95ae5a5716d1ff330b82ff5f10604766de384ca6436e836b3a6fa828afb29b2c57b13df2f380fce01af98935ed6c5b4e9ae4c74dec49c55d67e895256def7e422b3c47b29f500a972d862f78e14db6fd4a4274dffb2b7206ccd2129aae29a053b5a6b3a6ba00bf1d7016eef734cf6810da103d5362af17e20b5405088a16dbd87bbb96aca1e0a5a0aa747d6142c682e14329845e846c636165839cdb3f4807fd968a68e03e92156b4d2d4a499d39046acfc637eeb8e7af27ab5ab4e2e5407e35769dbd0ef4f1ac1b7f5a155ede35ee0bc71fcdf6c730d10a10f58400320c698e80ab7a308881e294aadb70e2c7510d8d2b6a484b59fe15a32983917548150508eaf9e23066123414badfecbb9ba6f2eca51ab513e461ea33180d133650e46f66befc1fb6f681feca4c4855fd1d4cbe6f655990a06eb9d3526298a7b32c622f7ee53518c426f1210df9abf5a24192c1eb9280387ead98cfb4de61eabfa4f96e8b611e23f77b42c3d5a242c93eb72fbaec25d117e525d22578e6eeaee50f0390c4c55d073a965281d2887d5d858da9fbb2e03772b618bae962e8824187918dfec541c4f5d9dd41a0b7a5663f4e4f54010db57a6164d449d3b54d0c438e82078bcbedb05e135c1177a173941dd8d29784fe67a86b0ce45c25bb0b7e282c0ade2dedc402b0a645e22fa65e453056fa0405e00d6d71e0ba609b960416739fb17464208e9bb7cadf7072baf18bb81dd951d378d0835255260ee77002418a8e45e3a5f188e2aa5e9b7181542090ce7bb8bdcfaca01b0d73ed959b6998c495a23ffd8fb47e90d995c4a06bfce85c371fae7a6eec979a6d157797cb9e03d1bf1e5fc95e814d56ee0e6122815fa2ce24804ea9135ef638961e5f55d7c572f56cd3b154d04ee7ed92272f20af7fc626b62dbd96505508eef839d3307ad7a9af580f5b8eea8771cca242f1a2ba6db71669aa03d91a0c2a7eb5065e5a38d066f5f9ea9f3290a78c8abe6f0e420f197f1db7408a207eaaec16ac2bbf9baf0febf5c0d4e900cee7ccd5aaba8a8,["0x0000000000000000000000000000000000000000000000000000000000000021"]`
 
 The first part is the proof written in bytes, while the array in this case contains only one value (which is 33 written in hexadecimals)
 
-To test it input the proof and the array into the smart contract of remix 
+To test it input the proof and the array into the smart contract of remix.
 
 ![Screenshot 2022-02-23 at 16.22.09.png](screenshots/screenshot11.png)
 
 As you can see the proof has been verified!
 
-## **Docs and other useful resources**
+Using a smart contract to verify the proof enables developers to include a set of collateral actions to be executed if the proof is verified. For example you can unlock an NFT airdrop if the user provides a valid proof. [Zeko](https://github.com/enricobottazzi/Zeko) library provides the tooling (Zero Knowledge Proof circuits + smart contracts) needed to run a Zero Knowledge Based NFT Airdrop
+
+## **Docs**
 
 - [circom documentation](https://docs.circom.io/getting-started/installation/#installing-circom) 
 - [circom github](https://github.com/iden3/circom)
@@ -302,3 +303,9 @@ As you can see the proof has been verified!
 - [circomlibjs](https://github.com/iden3/circomlibjs)
 - [snarkJS](https://github.com/iden3/snarkjs)
 - [rapidSnark](https://github.com/iden3/rapidsnark)
+
+## **Other Resources**
+- [zkEVM with Jordi & David from Hermez](https://zeroknowledge.fm/episode-194-zkevm-with-jordi-david-from-hermez/)
+- [SNARKS FOR NON-CRYPTOGRAPHERS - obront.eth Twitter post](https://twitter.com/zachobront/status/1501943116923740164?s=20&t=mNJuwAYe7fIPk5Lu5VNhxg)
+- [Jordi Baylina : ZK-EVM](https://www.youtube.com/watch?v=17d5DG6L2nw&t=14s)
+
