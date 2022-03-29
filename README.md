@@ -85,7 +85,8 @@ The demo that I am gonna run is based on the privacy application side of ZKP. Th
 6. Verify the proof via a smart contract
 
 Each step of the demo, the data, the actors and their actions are better explained in this board
-![ZKP_Miro_board_explained](screenshots/screenshot12.png)
+![Zero Knowledge Proof Explained - Frame 1](screenshots/screenshot12.jpg)
+
 
 Here's the link to the Miro board: https://miro.com/app/board/uXjVODmIOnk=/?invite_link_id=155047731605
 
