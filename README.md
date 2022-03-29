@@ -167,6 +167,8 @@ It's important to notice that by running this command it is generating two types
 
 By running this command it is able to extract the information that describes our circuit (multiplier.circom).
 
+![Zero Knowledge Proof ExplainedFrame1.jpg](screenshots/ZeroKnowledgeProofExplainedFrame1.jpg)
+
 ## 3. Generate the witness 
 
 ### Generate the witness
@@ -199,6 +201,8 @@ The file describes the wires computed by the circuit. In simple terms, the inter
 - 1 is just a constant of the constraints system generated
 - 33 is the public output (namely the product of the multiplication between my inputs)
 - 3, 11 are the private inputs
+
+![Zero Knowledge Proof ExplainedFrame2.jpg](screenshots/ZeroKnowledgeProofExplainedFrame2.jpg)
 
 ## 4. Generate the proof 
 
@@ -238,6 +242,8 @@ Here’s the plonk proof:
 
 ![Screenshot 2022-02-23 at 15.56.58.png](screenshots/screenshot7.png)
 
+![Zero Knowledge Proof ExplainedFrame3.jpg](screenshots/ZeroKnowledgeProofExplainedFrame3.jpg)
+
 ## 5. Verify the proof
 
 Now the focus switches to the side of the verifier. The verifier only has access to the `public.json`, `proof.json` and `verification_key.json` files. 
@@ -259,6 +265,8 @@ You can try to modify a single unit in the proof file and will see that the veri
 ![Screenshot 2022-02-23 at 16.02.53.png](screenshots/screenshot8.png)
 
 In this case snarkjs has been run in the command line but you can integrate it in any node program in the browser. 
+
+![Zero Knowledge Proof ExplainedFrame4.jpg](screenshots/ZeroKnowledgeProofExplainedFrame4.jpg)
 
 ## 6. Verify the proof via a smart contract
 
@@ -297,6 +305,8 @@ To test it input the proof and the array into the smart contract of remix.
 As you can see the proof has been verified!
 
 Using a smart contract to verify the proof enables developers to include a set of collateral actions to be executed if the proof is verified. For example you can unlock an NFT airdrop if the user provides a valid proof. [Zeko](https://github.com/enricobottazzi/Zeko) library provides the tooling (Zero Knowledge Proof circuits + smart contracts) needed to run a Zero Knowledge Based NFT Airdrop
+
+![Zero Knowledge Proof ExplainedFrame5.jpg](screenshots/ZeroKnowledgeProofExplainedFrame5.jpg)
 
 ## **Docs**
 
