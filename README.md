@@ -1,6 +1,6 @@
 This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22. Unfortunately, the recording of the presentation is no longer available.
 
-# **Introduction to Zero Knowledge Proof?**
+# **Introduction to Zero Knowledge Proof**
 
 To understand zero knowledge proof, it is first necessary to define the 2 actors involved in the process and their roles:
 
