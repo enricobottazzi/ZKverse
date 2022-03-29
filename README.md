@@ -84,6 +84,11 @@ The demo that I am gonna run is based on the privacy application side of ZKP. Th
 5. Verify the proof
 6. Verify the proof via a smart contract
 
+Each step of the demo, the data, the actors and their actions are better explained in this board
+[](
+
+Here's the link to the Miro board: https://miro.com/app/board/uXjVODmIOnk=/?invite_link_id=155047731605
+
 ## 1. Circom and dependecies setup
 
 ### install rust
@@ -203,9 +208,6 @@ The file describes the wires computed by the circuit. In simple terms, the inter
 It is a community generated trusted setup. // what is the trusted setup and why we are downloading it?
 
 ### Generate the verification key
-
-// what is the verification key?
-// Can it be kept public? It doesn't reveal any information about the computation
 
 The verification key is generated starting from `multiplier.r1cs` (description of the circuit and its contraints) and `powersOfTau28_hez_final_11.ptau` which is the trusted setup. The output file of the operation is `multiplier.zkey`, namely the verification key for the circuit.
 
