@@ -1,4 +1,4 @@
-This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22.  The video of Jordi's presentation is below:
+This tutorial is inspired by the presentation "All About the ZkVerse" presented by Jordi Baylina at EthDenver22.  The link to Jordi's presentation is below:
 
 [![Building a zkEVM - Jordi Baylina](https://img.youtube.com/vi/Xr5woqNCdgs/0.jpg)](https://youtu.be/Xr5woqNCdgs)
 
