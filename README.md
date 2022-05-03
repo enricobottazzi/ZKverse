@@ -1,4 +1,4 @@
-This tutorial is inspired Jordi Baylina's presentation [All About the ZkVerse](https://ethdenver.sched.com/event/x1mG/all-about-the-zkverse). It was presented on February 16, 2022 at EthDenver. Jordi is head of Polygon's Hermez group which is focued on Proof-of-Donation as the first Layer 2 consensus protocol for a ZK-rollup. 
+This tutorial is inspired Jordi Baylina's presentation [All About the ZkVerse](https://ethdenver.sched.com/event/x1mG/all-about-the-zkverse). It was presented on February 16, 2022 at EthDenver. Jordi is head of Polygon's Hermez group which is focuses on Proof-of-Donation. 
 
 The original presenation is no longer available, however, Jordi's presentation on [Building a zkEVM](https://youtu.be/Xr5woqNCdgs) is on YouTube.
 
