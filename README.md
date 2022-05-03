@@ -1,6 +1,6 @@
-This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22.  The video of Jordi's presentation is below:
+This tutorial is inspired Jordi Baylina's presentation "All About the ZkVerse". It was presented on February 20, 2022 at EthDenver. Jordi is head of Polygon's Hermez group which is focued on Proof-of-Donation as the first Layer 2 consensus protocol for a ZK-rollup. 
 
-[![Building a zkEVM - Jordi Baylina](https://img.youtube.com/vi/Xr5woqNCdgs/0.jpg)](https://youtu.be/Xr5woqNCdgs)
+Another instructional presentation by Jordi is titled [Building a zkEVM](https://youtu.be/Xr5woqNCdgs).
 
 # **Introduction to Zero Knowledge Proof**
 
