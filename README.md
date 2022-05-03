@@ -1,4 +1,6 @@
-This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22. Unfortunately, the recording of the webinar is no longer available.
+This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" performed by Jordi Baylina at EthDenver22.  The video of Jordi's presentation is below:
+
+https://youtu.be/Xr5woqNCdgs
 
 # **Introduction to Zero Knowledge Proof**
 
