@@ -2,8 +2,6 @@ This tutorial is inspired by the presentation "All About the ZkVerse | Polygon" 
 
 [![Building a zkEVM - Jordi Baylina](https://img.youtube.com/vi/Xr5woqNCdgs/0.jpg)](https://youtu.be/Xr5woqNCdgs)
 
-
-
 # **Introduction to Zero Knowledge Proof**
 
 To understand zero knowledge proof, it is first necessary to define the 2 actors involved in the process and their roles:
