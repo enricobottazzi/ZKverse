@@ -8,7 +8,7 @@ Other resources to ease you into the world of Zero Knowlege (ZK) Proofs:
 * [ZKVerse: Polygon’s Zero Knowledge Strategy Explained](https://blog.polygon.technology/zkverse-polygons-zero-knowledge-strategy-explained)
 * [Theoretical background of zk-SNARKs and zk-STARKS](https://consensys.net/blog/blockchain-explained/zero-knowledge-proofs-starks-vs-snarks/)
 
-# **Introduction to Zero Knowledge Proof**
+# Introduction to Zero Knowledge Proof
 
 To understand zero knowledge proof, it is first necessary to define the 2 actors involved in the process and their roles:
 
