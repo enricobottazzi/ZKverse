@@ -2,10 +2,11 @@ This tutorial is inspired Jordi Baylina's presentation [All About the ZkVerse](h
 
 The original presenation is no longer available, however, Jordi's presentation on [Building a zkEVM](https://youtu.be/Xr5woqNCdgs) is on YouTube.
 
-Other resources of interest from Polygon Hermez:
+Other resources to ease you into the world of Zero Knowlege (ZK) Proofs:
 
 * [ZKVerse: A Gentle Introduction to Zero Knowledge Proofs](https://blog.polygon.technology/zkverse-a-gentle-introduction-to-zero-knowledge-proofs)
 * [ZKVerse: Polygon’s Zero Knowledge Strategy Explained](https://blog.polygon.technology/zkverse-polygons-zero-knowledge-strategy-explained)
+* [Theoretical background of zk-SNARKs and zk-STARKS](https://consensys.net/blog/blockchain-explained/zero-knowledge-proofs-starks-vs-snarks/)
 
 # **Introduction to Zero Knowledge Proof**
 
