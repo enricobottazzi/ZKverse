@@ -210,7 +210,7 @@ The file describes the wires computed by the circuit. In simple terms, the inter
 
 `wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_11.ptau`
 
-It is a community-generated trusted setup. // what is the trusted setup and why are we downloading it?
+It is a community-generated trusted setup. A trusted setup is an algorithm that determines a protocol’s public parameters using information that must remain secret to ensure the protocol’s security.
 
 ### Generate the verification key
 
@@ -228,7 +228,7 @@ The verification key is generated starting from `multiplier.r1cs` (description o
 
 Let's zoom back for a second. The prover holds:
 - A witness (`witness.wtns`) that describes its computation starting from the public inputs (3, 11) to the output (33)
-- A verifcation key (`multiplier.zkey`) // that describes...
+- A verifcation key (`multiplier.zkey`)
 
 The goal now is to generate a proof starting from these files and provide it to the verifier. 
 
@@ -321,4 +321,5 @@ Using a smart contract to verify the proof enables developers to include a set o
 - [zkEVM with Jordi & David from Hermez](https://zeroknowledge.fm/episode-194-zkevm-with-jordi-david-from-hermez/)
 - [SNARKS FOR NON-CRYPTOGRAPHERS - obront.eth Twitter post](https://twitter.com/zachobront/status/1501943116923740164?s=20&t=mNJuwAYe7fIPk5Lu5VNhxg)
 - [Jordi Baylina : ZK-EVM](https://www.youtube.com/watch?v=17d5DG6L2nw&t=14s)
+- [ZK Jargon Decoder - @nico_mnbl](https://nmohnblatt.github.io/zk-jargon-decoder/foreword.html)
 
