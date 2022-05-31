@@ -148,7 +148,7 @@ The output (c) is public. The verifier has access to it.
 
 It's important to notice that by running this command it is generating two types of files:
 
---r1cs it generates the file multiplier.r1cs that contains the constraint system of the circuit in binary format.
+--r1cs it generates the file multiplier.r1cs that contains the constraints of the circuit in binary format. 
 --wasm: it generates the directory multiplier_js that contains the Wasm code (multiplier.wasm) and other files needed to generate the witness.
 
 ### Print info on the circuit
@@ -322,4 +322,5 @@ Using a smart contract to verify the proof enables developers to include a set o
 - [SNARKS FOR NON-CRYPTOGRAPHERS - obront.eth Twitter post](https://twitter.com/zachobront/status/1501943116923740164?s=20&t=mNJuwAYe7fIPk5Lu5VNhxg)
 - [Jordi Baylina : ZK-EVM](https://www.youtube.com/watch?v=17d5DG6L2nw&t=14s)
 - [ZK Jargon Decoder - @nico_mnbl](https://nmohnblatt.github.io/zk-jargon-decoder/foreword.html)
+- [Introduction to circom 2.0 - Albert Rubio & Josè M](https://youtu.be/6XxVeBFmIFs)
 
