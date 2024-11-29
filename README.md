@@ -66,11 +66,11 @@ Zero-knowledge proof is a method by which one party (the prover) can prove to an
 
 The circom templates are also composable: in the next example, we compose the XOR template within the Composite circuit.
 
-**In circom circuits the inputs by default are private, and the output by defualt is public. But you can change that by saying which input are public if you want to put some public inputs. We say that inputs s2 and s4 are public even though they could all be considered private and it will still work!**
+**In circom circuits the inputs by default are private, and the output by default is public. But you can change that by saying which input are public if you want to put some public inputs. We say that inputs s2 and s4 are public even though they could all be considered private and it will still work!**
 
 ![Screenshot 2022-02-23 at 14.20.25.png](screenshots/screenshot3.png)
 
-[Github/iden3/circomlib](https://github.com/iden3/circomlib) is a tooling set of standard circiuts!
+[Github/iden3/circomlib](https://github.com/iden3/circomlib) is a tooling set of standard circuits!
 
 [Github/iden3/snarkJs](https://github.com/iden3/snarkjs) is a javascript library. It is useful to generate proof in the browser!
 
