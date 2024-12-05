@@ -286,7 +286,7 @@ This contract has just one function that is *verifyProof* that takes the proof a
 ### 6.2. Generate solidty calldata
 
 In this second scenario, the verifier is the smart contract itself. 
-The verification is performed similarly as before, it only needs to export the `proof.json` and `public.json` files in bytes format in order to let verifier.sol understand it.
+The verification is performed similarly to before, it only needs to export the `proof.json` and `public.json` files in bytes format in order to let verifier.sol understand it.
 
 In order to generate the proof in bytes format, it needs to run 
 
