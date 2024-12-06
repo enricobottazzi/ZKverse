@@ -228,7 +228,7 @@ The verification key is generated starting from `multiplier.r1cs` (description o
 
 Let's zoom back for a second. The prover holds:
 - A witness (`witness.wtns`) that describes its computation starting from the public inputs (3, 11) to the output (33)
-- A verifcation key (`multiplier.zkey`)
+- A verification key (`multiplier.zkey`)
 
 The goal now is to generate a proof starting from these files and provide it to the verifier. 
 
@@ -283,7 +283,7 @@ This contract has just one function that is *verifyProof* that takes the proof a
 ![Screenshot 2022-02-23 at 16.09.14.png](screenshots/screenshot9.png)
 ![Screenshot 2022-02-23 at 16.16.22.png](screenshots/screenshot10.png)
 
-### 6.2. Generate solidty calldata
+### 6.2. Generate solidity calldata
 
 In this second scenario, the verifier is the smart contract itself. 
 The verification is performed similarly as before, it only needs to export the `proof.json` and `public.json` files in bytes format in order to let verifier.sol understand it.
